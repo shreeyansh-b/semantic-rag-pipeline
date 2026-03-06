@@ -1,0 +1,71 @@
+# Virtual environment
+rag-env/
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Distribution / packaging
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# FAISS / vector store indexes
+*.index
+*.faiss
+vector_store/
+faiss_index/
+
+# ML model files & HuggingFace cache
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+models/cache/
+.cache/
+huggingface/
+
+# Ingestion data & documents
+ingestion/data/
+ingestion/*.pdf
+ingestion/*.md
+ingestion/*.txt
+ingestion/*.csv
+
+# Logs
+*.log
+logs/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
