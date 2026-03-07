@@ -3,4 +3,8 @@ from pydantic import BaseModel
 
 
 class IngestRequest(BaseModel):
-    sentences: List[str]
+    file_content: str
+
+
+class QueryRequest(BaseModel):
+    query_txt: str

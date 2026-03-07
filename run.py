@@ -4,7 +4,7 @@ import faiss
 
 
 ingestion_service = get_ingestion_service("./data/access_control.md")
-chunks = ingestion_service.get_chunks()
+chunks = ingestion_service.get_chunks_from_file_path()
 
 embedding_service = get_embedding_service()
 

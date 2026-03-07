@@ -1,0 +1,8 @@
+// Ingest
+
+ curl -X POST http://localhost:8000/ingest \   -F "file=@./data/access_control.md"
+
+
+ // Query
+
+ curl -X POST http://localhost:8000/query \   -H "Content-Type: application/json" \   -d '{"query_txt": "Who has write access to production"}'

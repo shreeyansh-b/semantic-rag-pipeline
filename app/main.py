@@ -18,13 +18,19 @@ from typing import List
 from fastapi import Body, FastAPI
 
 from app.api.services.embedding import get_embedding_service
-from app.models.request import IngestRequest
+from app.api.services.vector_store import get_vector_store_service
+from app.dependencies import set_vector_store
+from app.api.routes.ingest import ingest_router
+from app.api.routes.query import query_router
+
 
 app = FastAPI()
 
+vector_store = get_vector_store_service(384)
+
+set_vector_store(vector_store)
+
 embedding_service = get_embedding_service()
 
-
-@app.post("/ingest")
-def ingestion(payload: IngestRequest):
-    return embedding_service.get_embedding(payload.sentences)
+app.include_router(ingest_router)
+app.include_router(query_router)
