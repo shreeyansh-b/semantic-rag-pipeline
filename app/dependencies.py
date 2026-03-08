@@ -1,4 +1,5 @@
 from app.api.services.chunks_store import ChunksStoreService
+from app.api.services.generation import GenerationService
 from app.api.services.vector_store import VectorStoreService
 
 
@@ -24,3 +25,15 @@ def set_chunks_store(cs: ChunksStoreService):
 
 def get_cs() -> ChunksStoreService:
     return _chunks_store
+
+
+_generation_service: GenerationService = None
+
+
+def set_generation_service(gs: GenerationService):
+    global _generation_service  # pylint: disable=global-statement
+    _generation_service = gs
+
+
+def get_gs() -> GenerationService:
+    return _generation_service

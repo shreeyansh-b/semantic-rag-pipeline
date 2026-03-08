@@ -1,8 +1,8 @@
-from fastapi import APIRouter, File, HTTPException, UploadFile, Body
+from fastapi import APIRouter
 
 from app.api.services.embedding import get_embedding_service
 from app.api.services.retrieval import get_retrieval_service
-from app.dependencies import get_cs, get_vs
+from app.dependencies import get_cs, get_gs, get_vs
 from app.models.request import QueryRequest
 
 query_router = APIRouter()
@@ -22,4 +22,7 @@ def query(payload: QueryRequest):
 
     chunks = chunks_store.get(indices[0])
 
-    return {"status": "ok", "distances": distances, "indices": indices, "chunks": chunks}
+    response = get_gs().generate(
+        payload.query_txt, context_chunks=chunks)
+
+    return {"status": "ok", "distances": distances, "indices": indices, "chunks": chunks, "llmResponse": response}

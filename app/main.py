@@ -15,15 +15,20 @@
 
 from typing import List
 
+from dotenv import load_dotenv
 from fastapi import Body, FastAPI
+
+from app.api.routes.ingest import ingest_router
+from app.api.routes.query import query_router
+import os
 
 from app.api.services.chunks_store import get_chunks_store_service
 from app.api.services.embedding import get_embedding_service
+from app.api.services.generation import get_generation_service
 from app.api.services.vector_store import get_vector_store_service
-from app.dependencies import set_chunks_store, set_vector_store
-from app.api.routes.ingest import ingest_router
-from app.api.routes.query import query_router
+from app.dependencies import set_chunks_store, set_generation_service, set_vector_store
 
+load_dotenv()
 
 app = FastAPI()
 
@@ -37,6 +42,9 @@ set_chunks_store(chunks_store)
 
 
 embedding_service = get_embedding_service()
+
+generation_service = get_generation_service(os.getenv("GEMINI_API_KEY"))
+set_generation_service(generation_service)
 
 app.include_router(ingest_router)
 app.include_router(query_router)
