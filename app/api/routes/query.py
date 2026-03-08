@@ -2,7 +2,7 @@ from fastapi import APIRouter, File, HTTPException, UploadFile, Body
 
 from app.api.services.embedding import get_embedding_service
 from app.api.services.retrieval import get_retrieval_service
-from app.dependencies import get_vs
+from app.dependencies import get_cs, get_vs
 from app.models.request import QueryRequest
 
 query_router = APIRouter()
@@ -18,4 +18,8 @@ def query(payload: QueryRequest):
 
     distances, indices = retrieval_service.retrieve(query_vector)
 
-    return {"status": "ok", "distances": distances, "indices": indices}
+    chunks_store = get_cs()
+
+    chunks = chunks_store.get(indices[0])
+
+    return {"status": "ok", "distances": distances, "indices": indices, "chunks": chunks}

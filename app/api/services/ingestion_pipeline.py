@@ -1,5 +1,5 @@
 from app.api.services.embedding import get_embedding_service
-from app.dependencies import get_vs
+from app.dependencies import get_cs, get_vs
 from ingestion.ingestion import get_ingestion_service
 
 
@@ -18,6 +18,10 @@ class IngestionPipeline:
         vector_store = get_vs()
 
         vector_store.add(vectors)
+
+        chunks_store = get_cs()
+
+        chunks_store.add(chunks)
 
         return chunks
 
