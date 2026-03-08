@@ -15,7 +15,8 @@ class ChunksStoreService:
         #                                       ↑ optional filter
 
         # [what  for each  in where]
-        return [self._chunks[idx] for idx in indices]
+        # Added if check if FAISS returns index -1
+        return [self._chunks[idx] for idx in indices if idx >= 0 and idx < len(self._chunks)]
 
 
 def get_chunks_store_service() -> ChunksStoreService:
